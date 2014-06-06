@@ -93,7 +93,7 @@ fi
   # Make npm output to STDOUT instead of its default STDERR
   if [ -n "$BUILD_COMMAND" ]; then
     echo "BUILD_COMMAND: $BUILD_COMMAND"
-    $BUILD_COMMAND
+    eval "$BUILD_COMMAND"
   else
     echo "No BUILD_COMMAND. Using default: npm install --production"
     npm install --userconfig $build_dir/.npmrc --production 2>&1 | indent
