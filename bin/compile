@@ -91,7 +91,13 @@ fi
 
   status "Installing dependencies"
   # Make npm output to STDOUT instead of its default STDERR
-  npm install --userconfig $build_dir/.npmrc --production 2>&1 | indent
+  if [ -n "$BUILD_COMMAND" ]; then
+    echo "BUILD_COMMAND: $BUILD_COMMAND"
+    $BUILD_COMMAND
+  else
+    echo "No BUILD_COMMAND. Using default: npm install --production"
+    npm install --userconfig $build_dir/.npmrc --production 2>&1 | indent
+  fi
 )
 
 # Persist goodies like node-version in the slug
