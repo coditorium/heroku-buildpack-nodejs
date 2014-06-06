@@ -91,6 +91,7 @@ fi
 
   status "Installing dependencies"
   # Make npm output to STDOUT instead of its default STDERR
+  chmod u+x $build_dir/node_modules/.bin -R
   export PATH="$PATH:$build_dir/node_modules/.bin"
   if [ -n "$BUILD_COMMAND" ]; then
     echo "BUILD_COMMAND: $BUILD_COMMAND"
