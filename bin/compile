@@ -91,6 +91,8 @@ fi
 
   status "Installing dependencies"
   # Make npm output to STDOUT instead of its default STDERR
+  echo "Adding binaries from node_modules directory"
+  ls $build_dir/node_modules/.bin
   chmod u+x $build_dir/node_modules/.bin -R
   export PATH="$PATH:$build_dir/node_modules/.bin"
   if [ -n "$BUILD_COMMAND" ]; then
