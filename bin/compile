@@ -91,13 +91,10 @@ fi
 
   status "Installing dependencies"
   # Make npm output to STDOUT instead of its default STDERR
-  echo "Adding binaries from node_modules directory"
-  ls $build_dir/node_modules/.bin
-  chmod u+x $build_dir/node_modules/.bin -R
   export PATH="$PATH:$build_dir/node_modules/.bin"
   if [ -n "$BUILD_COMMAND" ]; then
     echo "BUILD_COMMAND: $BUILD_COMMAND"
-    eval "$BUILD_COMMAND"
+    eval "$BUILD_COMMAND | indent"
   else
     echo "No BUILD_COMMAND. Using default: npm install --production"
     npm install --userconfig $build_dir/.npmrc --production 2>&1 | indent
