@@ -92,11 +92,15 @@ fi
   status "Installing dependencies"
   # Make npm output to STDOUT instead of its default STDERR
   export PATH="$PATH:$build_dir/node_modules/.bin"
-  if [ -n "$BUILD_COMMAND" ]; then
+  if [ -f $build_dir/.bin/heroku.sh ]; then
+    echo "Build file: .bin/heroku.sh"
+    $build_dir/.bin/heroku.sh
+  elif [ -n "$BUILD_COMMAND" ]; then
+    echo "No .bin/heroku.sh file. Using default: $BUILD_COMMAND"
     echo "BUILD_COMMAND: $BUILD_COMMAND"
     eval "$BUILD_COMMAND | indent"
   else
-    echo "No BUILD_COMMAND. Using default: npm install --production"
+    echo "No BUILD_COMMAND and .bin/heroku.sh file. Using default: npm install --production"
     npm install --userconfig $build_dir/.npmrc --production 2>&1 | indent
   fi
 )
