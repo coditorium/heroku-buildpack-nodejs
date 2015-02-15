@@ -94,7 +94,7 @@ fi
   export PATH="$PATH:$build_dir/node_modules/.bin"
   if [ -f $build_dir/.bin/heroku.sh ]; then
     echo "Build file: .bin/heroku.sh"
-    $build_dir/.bin/heroku.sh
+    source $build_dir/.bin/heroku.sh
   elif [ -n "$BUILD_COMMAND" ]; then
     echo "No .bin/heroku.sh file. Using default: $BUILD_COMMAND"
     echo "BUILD_COMMAND: $BUILD_COMMAND"
